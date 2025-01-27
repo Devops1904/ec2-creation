@@ -39,6 +39,17 @@ jobs:
     - name: Run EC2 deployment script
       run: python ./generate_tf.py
 
+    - name: Check if Terraform run is required
+      id: check_tf_run
+      run: |
+        if [ -f tf_run_required.flag ]; then
+            echo "Terraform run required"
+            echo "tf_run=true" >> $GITHUB_ENV
+        else
+            echo "Terraform run not required"
+            echo "tf_run=false" >> $GITHUB_ENV
+        fi
+
     - name: Commit and push changes
       if: env.tf_run == 'true'
       run: |
@@ -50,24 +61,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.MYGITHUB_TOKEN }}
 
-  check-and-apply-terraform:
-    runs-on: ubuntu-latest
-    needs: run-script
-
-    steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Check if Terraform run is required
-      id: check_tf_run
-      run: |
-        if [ -f tf_run_required.flag ]; then
-          echo "Terraform run required"
-          echo "tf_run=true" >> $GITHUB_ENV
-        else
-          echo "Terraform run not required"
-          echo "tf_run=false" >> $GITHUB_ENV
-        fi
 
     - name: Setup Terraform
       if: env.tf_run == 'true'
