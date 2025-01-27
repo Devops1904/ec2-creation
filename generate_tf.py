@@ -13,7 +13,11 @@ with open(ec2_data_path) as f:
 # Parse the EC2 data into a list of dictionaries
 ec2_instances = []
 for data in ec2_data:
-    instance_info = dict(item.split('=') for item in data.split(','))
+    instance_info = {}
+    for item in data.split(','):
+        key_value = item.split('=')
+        if len(key_value) == 2:
+            instance_info[key_value[0]] = key_value[1]
     ec2_instances.append(instance_info)
 
 # Load the Jinja2 template
@@ -32,6 +36,7 @@ with open(main_tf_path, 'r') as f:
     main_tf_content = f.read()
 
 # Render the template for each EC2 instance and append to main.tf if the instance name does not exist
+new_instance_added = False
 try:
     with open(main_tf_path, 'a') as f:
         for instance in ec2_instances:
@@ -42,7 +47,12 @@ try:
                 rendered_template = template.render(instance)
                 f.write(rendered_template + '\n')
                 print(f"Appended configuration for {instance_name} to {main_tf_path}")
+                new_instance_added = True
 except Exception as e:
     print(f"Error writing to {main_tf_path}: {e}")
+
+if new_instance_added:
+    with open('tf_run_required.flag', 'w') as flag_file:
+        flag_file.write('true')
 
 print("All configurations have been appended successfully.")
