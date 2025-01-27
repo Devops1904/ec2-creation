@@ -41,6 +41,7 @@ try:
     with open(main_tf_path, 'a') as f:
         for instance in ec2_instances:
             instance_name = instance['instance_name']
+            print(f"Processing instance: {instance}")  # Debugging line
             if f'module "ec2_instance_{instance_name}"' in main_tf_content:
                 print(f"Instance {instance_name} already exists in {main_tf_path}. Skipping.")
             else:
