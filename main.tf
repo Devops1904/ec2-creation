@@ -22,14 +22,3 @@ module "ec2_instance_ExampleInstance12" {
     Name = "ExampleInstance12"
   }
 }
-
-module "ec2_instance_santosh" {
-  source        = "./ec2_instance"
-  region        = "us-west-2"
-  ami           = "ami-0fa40e25bf4dda1f6"
-  instance_type = "t2.micro"
-
-  tags = {
-    Name = "santosh"
-  }
-}
