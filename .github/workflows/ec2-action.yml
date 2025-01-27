@@ -28,11 +28,14 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
+        # python -m pip install --upgrade pip
         pip install jinja2
 
     - name: Run EC2 deployment script
       run: python ./generate_tf.py
+    
+    - name: testing file text
+      run: cat main.tf
 
     - name: Commit and push changes
       if: env.tf_run == 'true'
