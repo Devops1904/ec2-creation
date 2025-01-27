@@ -8,7 +8,7 @@ if not os.path.exists(ec2_data_path):
     exit(1)
 
 with open(ec2_data_path) as f:
-    ec2_data = [line.strip() for line in f.readlines()]
+    ec2_data = [line.strip() for line in f.readlines() if line.strip()]
 
 # Parse the EC2 data into a list of dictionaries
 ec2_instances = []
