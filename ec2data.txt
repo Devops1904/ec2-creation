@@ -1,6 +1,3 @@
 instance_name=ExampleInstance11,region=us-west-2,ami=ami-0fa40e25bf4dda1f6,instance_type=t2.micro
 instance_name=ExampleInstance12,region=us-west-2,ami=ami-0fa40e25bf4dda1f6,instance_type=t2.micro
 instance_name=santosh,region=us-west-2,ami=ami-0fa40e25bf4dda1f6,instance_type=t2.micro
-
-
-
