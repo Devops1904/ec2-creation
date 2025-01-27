@@ -1,0 +1,4 @@
+instance_name=ExampleInstance1,region=us-west-2,ami=ami-0fa40e25bf4dda1f6,instance_type=t2.micro
+instance_name=ExampleInstance2,region=us-west-2,ami=ami-0fa40e25bf4dda1f6,instance_type=t2.micro
+instance_name=ExampleInstance3,region=us-west-2,ami=ami-0fa40e25bf4dda1f6,instance_type=t2.micro
+instance_name=ExampleInstance4,region=us-west-2,ami=ami-0fa40e25bf4dda1f6,instance_type=t2.micro

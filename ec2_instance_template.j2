@@ -1,0 +1,10 @@
+module "ec2_instance_{{ instance_name }}" {
+  source        = "./ec2_instance"
+  region        = "{{ region }}"
+  ami           = "{{ ami }}"
+  instance_type = "{{ instance_type }}"
+
+  tags = {
+    Name = "{{ instance_name }}"
+  }
+}
