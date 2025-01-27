@@ -4,9 +4,14 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'main.tf'
   pull_request:
     branches:
       - main
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   run-script:
@@ -28,6 +33,16 @@ jobs:
 
     - name: Run EC2 deployment script
       run: python ./generate_tf.py
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'santosh09'
+        git config --global user.email 'santosh09@gmail.com'
+        git add main.tf
+        git commit -m 'Update main.tf with new EC2 instance configurations'
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.MYGITHUB_TOKEN  }}
 
   run-terraform:
     runs-on: ubuntu-latest
