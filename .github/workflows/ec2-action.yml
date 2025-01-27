@@ -57,10 +57,7 @@ jobs:
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.MYGITHUB_TOKEN }}
-
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
+        
     - name: check main.tf
       run: cat main.tf
     
